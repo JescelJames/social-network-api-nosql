@@ -1,7 +1,10 @@
 const router = require('express').Router();
 
-const { } = require('');
+const { getUsers } = require('../../controllers/userController');
 
+// /api/users
+router.route('/')
+  .get(getUsers);
 
 
 
