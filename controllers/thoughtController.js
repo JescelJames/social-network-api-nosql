@@ -9,7 +9,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-
+  // create a thought and assign to a user
   async createThoughts(req, res) {
     try {
       // create a thought
@@ -25,7 +25,7 @@ module.exports = {
           message: "Thought created, but found no user with that ID",
         });
       }
-      res.json("Created a thought! 🎉");
+      res.json('Created a thought! 🎉');
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
@@ -33,24 +33,17 @@ module.exports = {
   },
   // get single thought
   async getSingleThought(req, res) {
-    try{
-      const thoughtSingle = await 
-        Thought
-          .findOne({ _id: req.params.thoughtId });
+    try {
+      const thoughtSingle = await Thought.findOne({
+        _id: req.params.thoughtId,
+      });
 
-      if(!thoughtSingle) {
-        return res
-          .status(404)
-          .json({ message: 'No thought with that ID.' })
+      if (!thoughtSingle) {
+        return res.status(404).json({ message: "No thought with that ID." });
       }
       res.json(thoughtSingle);
-    }
-    catch (err) {
+    } catch (err) {
       res.status(500).json(err);
     }
-  }
-
-
-
-
+  },
 };
