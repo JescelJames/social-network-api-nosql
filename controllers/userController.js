@@ -86,7 +86,7 @@ module.exports = {
     }
 
   },
-  // add a friend in json POST
+  // add a friend in json -- POST
   async addFriendJson(req, res) {
     try {
       // const user = await User.create(req.body);
