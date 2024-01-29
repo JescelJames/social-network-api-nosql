@@ -28,7 +28,8 @@ module.exports = {
         User
           .findOne({ _id: req.params.userId })
           .select('-__v')
-          .populate('thoughts');
+          .populate('thoughts')
+          .populate('friends');
 
       if (!userSingle) {
         return res.status(404).json({ message: 'No user with that ID' });
@@ -64,14 +65,15 @@ module.exports = {
   // create a user's friend and assign to a user
   async addFriend(req, res) {
     try {
-      // const user = await User.create(req.body);
+     
+      const user = await 
+        User
+          .findOneAndUpdate(
+            { _id: req.params.userId },
+            { $addToSet: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+          );
 
-      const user = await User.findOneAndUpdate(
-        { _id: req.params.userId },
-        { $addToSet: { friends: req.params.friendId } },
-        { runValidators: true, new: true }
-
-      );
       if(!user) {
         return res
           .status(404)
@@ -87,24 +89,46 @@ module.exports = {
 
   },
   // add a friend in json -- POST
+  // /api/users/:userId/friends
   async addFriendJson(req, res) {
     try {
       // const user = await User.create(req.body);
 
-      const user = await User.findOneAndUpdate(
-        { _id: req.params.userId },
-        { $addToSet: { friends: req.body } },
-        { runValidators: true, new: true }
+      const user = await 
+        User
+          .findOneAndUpdate(
+            { _id: req.params.userId },
+            { $addToSet: { friends: req.body } },
+            { runValidators: true, new: true }
+          );
 
-      );
       if(!user) {
         return res
           .status(404)
           .json({ message: 'Friend created, but found no user with that ID'});
       }
       
-
       res.json('Created a friend! 🎉');
+    }
+    catch (err) {
+      res.status(500).json(err);
+    }
+  },
+  // update a single user by it's Id
+  async updateSingleUser(req, res) {
+    try{
+      const userToUpdate = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+
+      );
+      if(!userToUpdate) {
+        return res.status(404).json({ message: 'No user found with this ID. Please verify ID. '});
+      }
+      res.json('User updated! 🎉');
+      // res.json(userToUpdate);
+
     }
     catch (err) {
       res.status(500).json(err);
