@@ -21,7 +21,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-
+  // get a single user
   async getSingleUser(req, res) {
     try{
       const userSingle = await 
@@ -56,12 +56,60 @@ module.exports = {
         { _id: { $in: userDelete.thoughts}}
       );
       res.json({ message: 'User and associated thoughts deleted!' })
-
-
     }
     catch (err) {
       res.status(500).json(err);
     }
+  },
+  // create a user's friend and assign to a user
+  async addFriend(req, res) {
+    try {
+      // const user = await User.create(req.body);
+
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { friends: req.params.friendId } },
+        { runValidators: true, new: true }
+
+      );
+      if(!user) {
+        return res
+          .status(404)
+          .json({ message: 'Friend created, but found no user with that ID'});
+      }
+      
+
+      res.json('Created a friend! 🎉');
+    }
+    catch (err) {
+      res.status(500).json(err);
+    }
+
+  },
+  // add a friend in json POST
+  async addFriendJson(req, res) {
+    try {
+      // const user = await User.create(req.body);
+
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { friends: req.body } },
+        { runValidators: true, new: true }
+
+      );
+      if(!user) {
+        return res
+          .status(404)
+          .json({ message: 'Friend created, but found no user with that ID'});
+      }
+      
+
+      res.json('Created a friend! 🎉');
+    }
+    catch (err) {
+      res.status(500).json(err);
+    }
+
   }
 
 
