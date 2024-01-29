@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { getUsers, createUser, getSingleUser } = require('../../controllers/userController');
+const { getUsers, createUser, getSingleUser, deleteUser } = require('../../controllers/userController');
 
 // /api/users
 router.route('/')
@@ -9,7 +9,7 @@ router.route('/')
 
 // /api/users/:userId  
 router.route('/:userId')
-  .get(getSingleUser);
-
+  .get(getSingleUser)
+  .delete(deleteUser);
 
 module.exports = router;
