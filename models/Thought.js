@@ -5,7 +5,7 @@ const thoughtSchema = new Schema(
   {
     thoughtText: { type: String },
     createdAt: { type: Date, default: Date.now },
-    username: [{ }]
+    // username: [{ }]
   }
 );
 
