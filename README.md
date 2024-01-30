@@ -14,6 +14,7 @@ This challenge helps view and make changes to the current database of a Social N
 
 ### Video Demonstration
 
+[social-network-api-nosql-demo.webm](https://github.com/JescelJames/social-network-api-nosql/assets/105643185/952a8152-1949-4aaa-a636-4ef98512a141)
 
 
 
@@ -21,8 +22,8 @@ This challenge helps view and make changes to the current database of a Social N
 
 - Repository Link:  https://github.com/JescelJames/social-network-api-nosql
 
-- Video Link: 
-
+- Video Link: https://drive.google.com/file/d/1HCixLffpYVKHJnPVGFYYfhskUrxof-cE/view
+  
 
 
 
