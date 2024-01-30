@@ -63,6 +63,7 @@ module.exports = {
     }
   },
   // create a user's friend and assign to a user
+  // /api/users/:userId/friends/:friendId
   async addFriend(req, res) {
     try {
      
@@ -132,8 +133,32 @@ module.exports = {
       res.status(500).json(err);
     }
 
-  }
+  },
+  // /api/users/:userId/friends/:friendId
+  async deleteAFriend(req, res) {
+    try {
+     
+      const user = await 
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+          );
 
+      if(!user) {
+        return res
+          .status(404)
+          .json({ message: 'Unable to find no user with that ID'});
+      }
+      
+
+      res.json('Deleted a friend from a user');
+    }
+    catch (err) {
+      res.status(500).json(err);
+    }
+
+  },
 
 
 };
