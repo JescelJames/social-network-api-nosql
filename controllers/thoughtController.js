@@ -39,11 +39,34 @@ module.exports = {
       });
 
       if (!thoughtSingle) {
-        return res.status(404).json({ message: "No thought with that ID." });
+        return res
+          .status(404)
+          .json({ message: "No thought with that ID." });
       }
       res.json(thoughtSingle);
     } catch (err) {
       res.status(500).json(err);
     }
   },
-};
+  // delete a thought by it's _id
+  async deleteAThought(req,res) {
+    try{
+      const thoughtToDelete = await Thought.findOneAndDelete(
+        { _id: req.params.thoughtId }
+      );
+      if(!thoughtToDelete) {
+        return res
+          .status(404)
+          .json({ message: 'No thought identified with this ID. Please verify ID.' });
+      }
+      res.json('Thought deleted! ')
+    }
+    catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+
+
+
+}; //ends here

@@ -92,8 +92,6 @@ module.exports = {
   // /api/users/:userId/friends
   async addFriendJson(req, res) {
     try {
-      // const user = await User.create(req.body);
-
       const user = await 
         User
           .findOneAndUpdate(
