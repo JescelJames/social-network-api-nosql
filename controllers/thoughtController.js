@@ -82,9 +82,31 @@ module.exports = {
     catch (err) {
       res.status(500).json(err);
     }
+  },
+  // api/thoughts/:thoughtId/reactions
+  async addAReactionJson(req, res) {
+    try {
+      const reactionToAdd = await 
+        Thought.findOneAndUpdate(
+          { _id: req.params.thoughtId},
+          { $addToSet: { reactions: req.body} },
+          { runValidators: true, new: true }
+        );
+
+      if (!reactionToAdd) {
+          return res
+            .status(404)
+            .json({ message: 'Unable to find thought with that ID' });
+      }
+
+      // res.json('Created reactions in a thought! 🎉');
+      res.json(reactionToAdd);
+
+    } 
+    catch (err) {
+      res.status(500).json(err);
+    }
   }
-
-
 
 
 }; //ends here
