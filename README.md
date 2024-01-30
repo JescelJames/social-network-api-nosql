@@ -36,7 +36,7 @@ This challenge helps view and make changes to the current database of a Social N
 4. Virtuals, Schema.Types.ObjectId, referencing to a schema
 5. Self assigned in schema
 6. Integrating schema types to a model.
-7. Dong module.exports of async..await of queries and requiring them in router file makes it cleaner and easy to understand once you get used to it.
+7. Doing module.exports of async..await of queries and requiring them in router file makes it cleaner and easy to understand once you get used to it.
 8. The longer I stare at codes, the more it make it easier to understand and grasp the concept.
 
 
@@ -44,8 +44,8 @@ This challenge helps view and make changes to the current database of a Social N
 
 
 ## Code Description
-- Change Directory to db, THEN type in terminal: mysql -u root -p THEN type in password
-- This code can be accessed in terminal by typing in terminal: node index
+
+- This code can be accessed in terminal by typing in terminal: npm run dev
 
 
 ## Installation Instructions
@@ -76,7 +76,7 @@ Prerequisites:
 ## Credits
 
 #### My Instructors:
-- Ben Wright (For helping me figure out ways to get data: req.body, req.params, req.query!)
+- Ben Wright (For explaining 3 ways to get data: req.body, req.params, req.query!)
 - Max Ohsawa 
 
 #### My Academic Advisor
