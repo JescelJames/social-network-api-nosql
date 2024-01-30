@@ -1,4 +1,4 @@
-const { Thought, User } = require("../models");
+const { Thought, User, Reaction } = require("../models");
 
 module.exports = {
   async getThoughts(req, res) {
@@ -83,6 +83,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+  // create a reaction to a thought id
   // api/thoughts/:thoughtId/reactions
   async addAReactionJson(req, res) {
     try {
@@ -105,6 +106,29 @@ module.exports = {
     } 
     catch (err) {
       res.status(500).json(err);
+    }
+  },
+  // delete a reaction from a thought id
+  async deleteAReactionJson(req, res) {
+    try {
+      const reactionToDelete = await 
+        Thought.findOneAndUpdate(
+          { _id: req.params.thoughtId },
+          { $pull: {reactions: { reactionid: req.params.reactionid}}}, 
+          { runValidator: true, new: true}
+
+        );
+
+        if (!reactionToDelete) {
+          return res.status(404).json({ message: 'No reaction with this ID'})
+        }
+
+        res.json(reactionToDelete);
+
+    }
+    catch (err) {
+      res.status(500).json(err);
+
     }
   }
 
